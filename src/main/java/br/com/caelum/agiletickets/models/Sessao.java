@@ -124,5 +124,9 @@ public class Sessao {
 	public double getPorcentagemDisponivel() {
 		return this.getIngressosDisponiveis() / this.getTotalIngressos().doubleValue();
 	}
+
+	public BigDecimal getPrecoComTaxa(double taxa) {
+		return this.getPreco().add(this.getPreco().multiply(BigDecimal.valueOf(taxa)));
+	}
 	
 }
