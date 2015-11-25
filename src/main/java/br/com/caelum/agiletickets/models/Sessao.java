@@ -120,5 +120,9 @@ public class Sessao {
 	public BigDecimal getPreco() {
 		return preco;
 	}
+
+	public double getPorcentagemDisponivel() {
+		return this.getIngressosDisponiveis() / this.getTotalIngressos().doubleValue();
+	}
 	
 }

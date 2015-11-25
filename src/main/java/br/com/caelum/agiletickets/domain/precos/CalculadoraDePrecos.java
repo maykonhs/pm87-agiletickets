@@ -12,13 +12,13 @@ public class CalculadoraDePrecos {
 		
 		if(sessao.getEspetaculo().getTipo().equals(TipoDeEspetaculo.CINEMA) || sessao.getEspetaculo().getTipo().equals(TipoDeEspetaculo.SHOW)) {
 			//quando estiver acabando os ingressos... 
-			if(getPorcentagemDisponivel(sessao) <= 0.05) { 
+			if(sessao.getPorcentagemDisponivel() <= 0.05) { 
 				preco = getPrecoComTaxa(sessao, 0.10);
 			} else {
 				preco = sessao.getPreco();
 			}
-		} else if(sessao.getEspetaculo().getTipo().equals(TipoDeEspetaculo.BALLET)) {
-			if(getPorcentagemDisponivel(sessao) <= 0.50) { 
+		} else if(sessao.getEspetaculo().getTipo().equals(TipoDeEspetaculo.BALLET) || sessao.getEspetaculo().getTipo().equals(TipoDeEspetaculo.ORQUESTRA)) {
+			if(sessao.getPorcentagemDisponivel() <= 0.50) { 
 				preco = getPrecoComTaxa(sessao, 0.20);
 			} else {
 				preco = sessao.getPreco();
@@ -27,17 +27,7 @@ public class CalculadoraDePrecos {
 			if(sessao.getDuracaoEmMinutos() > 60){
 				preco = preco.add(sessao.getPreco().multiply(BigDecimal.valueOf(0.10)));
 			}
-		} else if(sessao.getEspetaculo().getTipo().equals(TipoDeEspetaculo.ORQUESTRA)) {
-			if(getPorcentagemDisponivel(sessao) <= 0.50) { 
-				preco = getPrecoComTaxa(sessao, 0.20);
-			} else {
-				preco = sessao.getPreco();
-			}
-
-			if(sessao.getDuracaoEmMinutos() > 60){
-				preco = preco.add(sessao.getPreco().multiply(BigDecimal.valueOf(0.10)));
-			}
-		}  else {
+		}   else {
 			//nao aplica aumento para teatro (quem vai é pobretão)
 			preco = sessao.getPreco();
 		} 
@@ -47,14 +37,6 @@ public class CalculadoraDePrecos {
 
 	private static BigDecimal getPrecoComTaxa(Sessao sessao, double taxa) {
 		return sessao.getPreco().add(sessao.getPreco().multiply(BigDecimal.valueOf(taxa)));
-	}
-
-	private static double getPorcentagemDisponivel(Sessao sessao) {
-		return getIngressosDisponiveis(sessao) / sessao.getTotalIngressos().doubleValue();
-	}
-
-	private static int getIngressosDisponiveis(Sessao sessao) {
-		return sessao.getTotalIngressos() - sessao.getIngressosReservados();
 	}
 
 }
