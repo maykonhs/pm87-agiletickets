@@ -56,5 +56,5 @@ public class SessaoTest {
 		sessao.setPreco(BigDecimal.valueOf(10.00));
 		Assert.assertEquals(new BigDecimal("12.00"), sessao.getPrecoComTaxa(0.2));
 	}
-	
+		
 }

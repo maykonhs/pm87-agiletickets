@@ -25,6 +25,9 @@ public class Sessao {
 
 	@Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
 	private DateTime inicio;
+	
+	@Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+	private DateTime fim;
 
 	private Integer duracaoEmMinutos;
 
@@ -127,6 +130,14 @@ public class Sessao {
 
 	public BigDecimal getPrecoComTaxa(double taxa) {
 		return this.getPreco().add(this.getPreco().multiply(BigDecimal.valueOf(taxa)));
+	}
+
+	public DateTime getFim() {
+		return fim;
+	}
+
+	public void setFim(DateTime fim) {
+		this.fim = fim;
 	}
 	
 }
