@@ -96,7 +96,7 @@ public class EspetaculoTest {
 		java.util.List<Sessao> sessoes = espetaculo.criaSessoes(data, data, hora, Periodicidade.DIARIA);
 		
 		Assert.assertEquals(1, sessoes.size());
-		Assert.assertEquals(new DateTime(2015, 11, 26, 22, 0), sessoes.get(0).getInicio());
+		Assert.assertEquals(new DateTime(2015, 11, 26, 22, 0), sessoes.get(1).getInicio());
 		Assert.assertEquals(new DateTime(2015, 11, 26, 22, 0), sessoes.get(sessoes.size()-1).getFim());
 	}
 	
